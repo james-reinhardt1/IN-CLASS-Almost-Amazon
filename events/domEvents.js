@@ -4,6 +4,8 @@ import { showBooks } from '../pages/books';
 import { showAuthors } from '../pages/authors';
 import addBookForm from '../components/forms/addBookForm';
 import addAuthorForm from '../components/forms/addAuthorForm';
+import getBookDetails from '../api/mergedData';
+import viewBook from '../pages/viewBook';
 
 const domEvents = () => {
   document.querySelector('#main-container').addEventListener('click', (e) => {
@@ -35,8 +37,11 @@ const domEvents = () => {
     }
     // TODO: CLICK EVENT FOR VIEW BOOK DETAILS
     if (e.target.id.includes('view-book-btn')) {
-      console.warn('VIEW BOOK', e.target.id);
-      console.warn(e.target.id.split('--'));
+      // console.warn('VIEW BOOK', e.target.id);
+      // console.warn(e.target.id.split('--'));
+      const [, firebaseKey] = e.target.id.split('--');
+
+      getBookDetails(firebaseKey).then((viewBook));
     }
 
     // FIXME: ADD CLICK EVENT FOR DELETING AN AUTHOR
