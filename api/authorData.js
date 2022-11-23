@@ -3,8 +3,8 @@ import client from '../utils/client';
 const endpoint = client.databaseURL;
 
 // FIXME:  GET ALL AUTHORS
-const getAuthors = () => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/authors.json`, {
+const getAuthors = (uid) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/authors.json?orderBy="uid"&equalTo="${uid}"`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -22,13 +22,13 @@ const getAuthors = () => new Promise((resolve, reject) => {
 });
 
 // FIXME: CREATE AUTHOR
-const createAuthor = (payload) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/authors.json`, {
+const createAuthor = (uid) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/authors.json?orderBy="uid"&equalTo="${uid}"`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(payload),
+    body: JSON.stringify(uid),
   })
     .then((response) => response.json())
     .then((data) => resolve(data))
@@ -36,8 +36,8 @@ const createAuthor = (payload) => new Promise((resolve, reject) => {
 });
 
 // FIXME: GET SINGLE AUTHOR
-const getSingleAuthor = (firebaseKey) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/authors/${firebaseKey}.json`, {
+const getSingleAuthor = (uid) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/authors.json?orderBy="uid"&equalTo="${uid}"`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json'
@@ -75,8 +75,8 @@ const updateAuthor = (payload) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const filterAuthor = () => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/authors.json?orderBy="favorite"&equalTo=true`, {
+const filterAuthor = (uid) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/authors.json?orderBy="uid"&equalTo="${uid}"`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -88,8 +88,8 @@ const filterAuthor = () => new Promise((resolve, reject) => {
 });
 
 // TODO: GET A SINGLE AUTHOR'S BOOKS
-const getAuthorBooks = (firebaseKey) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/books.json?orderBy="author_id"&equalTo=${firebaseKey}`, {
+const getAuthorBooks = (uid) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/books.json?orderBy="author_id"&equalTo="${uid}"`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
