@@ -6,8 +6,8 @@ import { deleteBook, getSingleBook } from './bookData';
 // TODO: Get data for viewBook
 const getBookDetails = (firebaseKey) => new Promise((resolve, reject) => {
   getSingleBook(firebaseKey).then((bookObject) => {
-    getSingleAuthor(bookObject.author_id)
-      .then((authorObject) => resolve({ ...bookObject, authorObject }));
+    getSingleAuthor(bookObject.author_id) // looking to be passed an author ID. When you click on bookObject,
+      .then((authorObject) => resolve({ ...bookObject, authorObject })); // creating a new object with an array with our author details/object
   }).catch(reject);
 });
 
