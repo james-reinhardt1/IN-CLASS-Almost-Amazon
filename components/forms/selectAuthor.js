@@ -1,6 +1,7 @@
 import { getAuthors } from '../../api/authorData';
 import renderToDOM from '../../utils/renderToDom';
 
+// Add UID in selectAuthor and getAuthors
 const selectAuthor = (authorId) => {
   let domString = `<label for="author">Select an Author</label>
     <select class="form-control" id="author_id" required>
