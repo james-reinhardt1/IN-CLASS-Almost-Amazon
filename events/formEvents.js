@@ -30,8 +30,8 @@ const formEvents = (user) => {
     // TODO: CLICK EVENT FOR EDITING A BOOK
     if (e.target.id.includes('update-book')) {
       const [, firebaseKey] = e.target.id.split('--');
-      // console.warn('CLICKED UPDATE BOOK', e.target.id);
-      // console.warn(firebaseKey);
+      console.warn('CLICKED UPDATE BOOK', e.target.id);
+      console.warn(firebaseKey);
       const payload = {
         title: document.querySelector('#title').value,
         description: document.querySelector('#description').value,
@@ -39,12 +39,11 @@ const formEvents = (user) => {
         price: document.querySelector('#price').value,
         author_id: document.querySelector('#author_id').value,
         sale: document.querySelector('#sale').checked,
-        uid: user.uid,
-        firebaseKey,
+        firebaseKey
       };
 
       updateBook(payload).then(() => {
-        getBooks().then(showBooks);
+        getBooks(user.uid).then(showBooks);
       });
     }
 
@@ -71,12 +70,11 @@ const formEvents = (user) => {
     if (e.target.id.includes('update-author')) {
       const [, firebaseKey] = e.target.id.split('--');
       const payload = {
-        email: document.querySelector('#email').value,
         favorite: document.querySelector('#favorite').checked,
         first_name: document.querySelector('#first_name').value,
         last_name: document.querySelector('#last_name').value,
         uid: user.uid,
-        firebaseKey,
+        firebaseKey
       };
 
       updateAuthor(payload).then(() => {
