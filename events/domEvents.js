@@ -25,7 +25,7 @@ const domEvents = (user) => {
 
     // TODO: CLICK EVENT FOR SHOWING FORM FOR ADDING A BOOK
     if (e.target.id.includes('add-book-btn')) {
-      addBookForm(user);
+      addBookForm(user.uid);
     }
 
     // TODO: CLICK EVENT EDITING/UPDATING A BOOK
@@ -38,11 +38,12 @@ const domEvents = (user) => {
     }
     // TODO: CLICK EVENT FOR VIEW BOOK DETAILS
     if (e.target.id.includes('view-book-btn')) {
-      // console.warn('VIEW BOOK', e.target.id);
-      // console.warn(e.target.id.split('--'));
+      console.warn('VIEW BOOK', e.target.id);
+      console.warn(e.target.id.split('--'));
       const [, firebaseKey] = e.target.id.split('--');
 
-      getBookDetails(firebaseKey).then((viewBook));
+      getBookDetails(firebaseKey).then(viewBook);
+      console.warn(viewBook);
     }
 
     // FIXME: ADD CLICK EVENT FOR DELETING AN AUTHOR
